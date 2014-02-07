@@ -8,5 +8,9 @@
     <?php print modulekit_include_css(); /* prints all css-includes */ ?>
   </head>
   <body>
+<div id='map'></div>
+<div id='ide'>
+<textarea id='editor'></textarea>
+</div>
   </body>
 </html>
