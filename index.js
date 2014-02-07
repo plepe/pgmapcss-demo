@@ -7,4 +7,12 @@ window.onload = function() {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
+  // WMS tilelayer
+  var wms = L.tileLayer.wms("http://192.168.0.130:8000/", {
+    layers: '__all__',
+    format: 'image/png',
+    transparent: true,
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
 }.bind(this);
