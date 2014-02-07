@@ -8,7 +8,7 @@ window.onload = function() {
   }).addTo(map);
 
   // WMS tilelayer
-  var wms = L.tileLayer.wms("http://192.168.0.130:8000/", {
+  var wms = L.imageOverlay.wms("http://192.168.0.130:8000/", {
     layers: '__all__',
     format: 'image/png',
     transparent: true,

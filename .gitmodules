@@ -4,3 +4,6 @@
 [submodule "modules/ajax"]
 	path = modules/ajax
 	url = https://github.com/plepe/modulekit-ajax.git
+[submodule "lib/leaflet.singletilewmslayer"]
+	path = lib/leaflet.singletilewmslayer
+	url = https://gist.github.com/5415445.git
