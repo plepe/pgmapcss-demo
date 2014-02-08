@@ -7,3 +7,6 @@
 [submodule "lib/leaflet.singletilewmslayer"]
 	path = lib/leaflet.singletilewmslayer
 	url = https://gist.github.com/5415445.git
+[submodule "modules/base"]
+	path = modules/base
+	url = https://github.com/plepe/modulekit-base.git

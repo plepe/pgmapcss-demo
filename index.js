@@ -15,4 +15,6 @@ window.onload = function() {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
+  // other parts of the code shall initialize too ...
+  call_hooks("init");
 }.bind(this);
