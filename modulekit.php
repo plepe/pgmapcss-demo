@@ -4,10 +4,14 @@ $depend = array(
 );
 
 $include = array(
+  'php'=>array(
+    'pgmapcss.php',
+  ),
   'js'=>array(
     'lib/leaflet/leaflet.js',
     'lib/leaflet.singletilewmslayer/leaflet.singletilewmslayer.js',
     'index.js',
+    'ide.js',
   ),
   'css'=>array(
     'lib/leaflet/leaflet.css',

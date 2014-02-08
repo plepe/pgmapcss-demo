@@ -9,8 +9,9 @@
   </head>
   <body>
 <div id='map'></div>
-<div id='ide'>
-<textarea id='editor'></textarea>
-</div>
+<form id='ide'>
+<textarea id='editor' name='mapcss_file'></textarea>
+<input type='submit' value='Save' />
+</form>
   </body>
 </html>
