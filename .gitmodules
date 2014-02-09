@@ -10,3 +10,6 @@
 [submodule "modules/base"]
 	path = modules/base
 	url = https://github.com/plepe/modulekit-base.git
+[submodule "modules/adv_exec"]
+	path = modules/adv_exec
+	url = https://github.com/plepe/adv_exec.git

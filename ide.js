@@ -8,7 +8,16 @@ function process_form(foo) {
 
   content = form.elements.mapcss_file.value;
   ajax("save", null, content, function(v) {
-    call_hooks("style_save", v);
+    if(!v) {
+      alert("An unknown error occured!");
+    }
+
+    if(v.status == 0) {
+      call_hooks("style_save", v);
+    }
+    else {
+      alert("Error compiling style file:\n" + v.output);
+    }
   });
 
   return false;

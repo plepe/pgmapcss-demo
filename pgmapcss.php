@@ -1,20 +1,19 @@
 <?
 function ajax_save($param, $content) {
   $id = 't' . uniqid();
+  $file = "{$id}.mapcss";
 
-  file_put_contents("data/{$id}.mapcss", $content);
-  chdir("data/");
-  $f=popen("pgmapcss -dskunk -uskunk -pPASSWORD -Hlocalhost -tmapnik-2.2 {$id}.mapcss", "r");
+  file_put_contents("data/{$file}", $content);
+  $f=adv_exec("pgmapcss -dskunk -uskunk -pPASSWORD -Hlocalhost -tmapnik-2.2 \"{$file}\"", "data/", array());
 
-  $ret = "";
-  while($r=fgets($f))
-    $ret .= $r;
-
-  $status = pclose($f);
+  if($f[0] != 0) {
+    unlink("data/{$file}");
+    $id = null;
+  }
 
   return array(
     'id'=>$id,
-    'output'=>$ret,
-    'status'=>$status,
+    'output'=>$f[1],
+    'status'=>$f[0],
   );
 }
