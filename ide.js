@@ -8,7 +8,7 @@ function process_form(foo) {
 
   content = form.elements.mapcss_file.value;
   ajax("save", null, content, function(v) {
-    alert(JSON.stringify(v));
+    call_hooks("style_save", v);
   });
 
   return false;
