@@ -22,4 +22,6 @@ register_hook("style_save", function(ob) {
     transparent: true,
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
+
+  History.pushState(null, null, '?style=' + ob.id);
 });
