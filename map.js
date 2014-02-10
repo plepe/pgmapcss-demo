@@ -11,6 +11,10 @@ register_hook("init", function() {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
+  map.on('moveend', function(e) {
+    History.replaceState(null, null, build_params());
+  });
+
   map_wms_id = null;
 });
 
@@ -40,8 +44,19 @@ register_hook("style_save", function(ob) {
 register_hook("param_change", function(params) {
   if('style' in params)
     map_change_wms(params.style);
+
+  if('zoom' in params)
+    map.setZoom(params.zoom);
+
+  if('lat' in params && 'lon' in params)
+    map.panTo([ params.lat, params.lon ]);
 });
 
 register_hook("build_params", function(params) {
   params.style = map_wms_id;
+
+  params.zoom = map.getZoom();
+  var c = map.getCenter();
+  params.lat = c.lat.toFixed(4);
+  params.lon = c.lng.toFixed(4);
 });
