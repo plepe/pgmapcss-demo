@@ -17,3 +17,13 @@ function ajax_save($param, $content) {
     'status'=>$f[0],
   );
 }
+
+function ajax_load($param) {
+  $id = $param['id'];
+  if(!preg_match('/^[0-9a-z]+$/i', $id))
+    return "WRONG ID!";
+
+  $file = "{$id}.mapcss";
+
+  return file_get_contents("data/{$file}");
+}

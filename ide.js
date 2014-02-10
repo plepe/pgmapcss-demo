@@ -22,3 +22,11 @@ function process_form(foo) {
 
   return false;
 }
+
+register_hook("param_change", function(params) {
+  if('style' in params)
+    ajax("load", { 'id': params.style }, null, function(data) {
+      var form = document.getElementById("ide");
+      form.elements.mapcss_file.value = data;
+    });
+});
