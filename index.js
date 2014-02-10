@@ -14,6 +14,17 @@ window.onload = function() {
   }
 }.bind(this);
 
+function build_params() {
+  var params = {};
+  call_hooks("build_params", params);
+
+  var j = [];
+  for(var k in params)
+    j.push(k + '=' + params[k]);
+
+  return '?' + j.join("&");
+}
+
 // Source: http://phpjs.org/functions/urldecode:572
 function urldecode (str) {
     return decodeURIComponent((str + '').replace(/\+/g, '%20'));

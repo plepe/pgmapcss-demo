@@ -29,8 +29,8 @@ function map_change_wms(id) {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
-  History.pushState(null, null, '?style=' + id);
   map_wms_id = id;
+  History.pushState(null, null, build_params());
 }
 
 register_hook("style_save", function(ob) {
@@ -40,4 +40,8 @@ register_hook("style_save", function(ob) {
 register_hook("param_change", function(params) {
   if('style' in params)
     map_change_wms(params.style);
+});
+
+register_hook("build_params", function(params) {
+  params.style = map_wms_id;
 });
