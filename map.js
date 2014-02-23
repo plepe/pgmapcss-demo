@@ -1,6 +1,7 @@
 var map;
 var wms;
 var map_mws_id;
+var map_pos;
 
 register_hook("init", function() {
   // create a map in the "map" div, set the view to a given place and zoom
@@ -49,7 +50,8 @@ register_hook("param_change", function(params) {
     map.setZoom(params.zoom);
 
   if('lat' in params && 'lon' in params)
-    map.panTo([ params.lat, params.lon ]);
+    if((map_pos.lat != params.lat) || (map_pos.lon != params.lon))
+        map.panTo([ params.lat, params.lon ]);
 });
 
 register_hook("build_params", function(params) {
@@ -59,4 +61,6 @@ register_hook("build_params", function(params) {
   var c = map.getCenter();
   params.lat = c.lat.toFixed(4);
   params.lon = c.lng.toFixed(4);
+
+  map_pos = params;
 });
