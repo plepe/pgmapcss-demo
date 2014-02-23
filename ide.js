@@ -2,11 +2,11 @@ var ide_current_style;
 
 register_hook("init", function() {
   // Bind IDE to function
-  document.getElementById("ide").onsubmit = process_form;
+  document.getElementById("form").onsubmit = process_form;
 });
 
 function process_form(foo) {
-  form = document.getElementById("ide");
+  form = document.getElementById("form");
 
   content = form.elements.mapcss_file.value;
   ajax("save", null, content, function(v) {
@@ -28,7 +28,7 @@ function process_form(foo) {
 register_hook("param_change", function(params) {
   if(('style' in params) && (ide_current_style != params.style))
     ajax("load", { 'id': params.style }, null, function(data) {
-      var form = document.getElementById("ide");
+      var form = document.getElementById("form");
       form.elements.mapcss_file.value = data;
     });
 
