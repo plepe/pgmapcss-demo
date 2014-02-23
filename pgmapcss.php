@@ -1,6 +1,10 @@
 <?
+function build_id($content) {
+  return 't' . sha1($content);
+}
+
 function ajax_save($param, $content) {
-  $id = 't' . uniqid();
+  $id = build_id($content);
   $file = "{$id}.mapcss";
 
   file_put_contents("data/{$file}", $content);
