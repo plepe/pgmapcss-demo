@@ -1,6 +1,6 @@
 <?
 $depend = array(
-  "modulekit-ajax", "hooks", "adv_exec",
+  "modulekit-ajax", "hooks", "adv_exec", "html",
 );
 
 $include = array(

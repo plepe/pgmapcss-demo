@@ -31,7 +31,7 @@ function map_change_wms(id) {
   }
   else {
       // WMS tilelayer
-      wms = L.imageOverlay.wms("http://192.168.0.130:8000/", {
+      wms = L.imageOverlay.wms(config.wms.base_url, {
         layers: id,
         format: 'image/png',
         transparent: true,

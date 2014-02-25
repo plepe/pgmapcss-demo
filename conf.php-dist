@@ -13,5 +13,9 @@ $pgmapcss = array(
     'template'  => 'mapnik-2.2',
 );
 
+$wms = array(
+    'base_url'  => 'http://localhost:8000/',
+);
+
 // You should use a directory which is not reachable by the webserver
 $data_dir = 'data/';
