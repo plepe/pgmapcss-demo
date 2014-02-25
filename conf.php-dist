@@ -1,0 +1,17 @@
+<?
+$db = array(
+    'user'      => 'user',
+    'database'  => 'database',
+    'password'  => 'PASSWORD',
+    'host'      => 'localhost',
+);
+
+$pgmapcss = array(
+    // path to binary, e.g. /usr/local/bin/pgmapcss; will be called from shell, so if pgmapcss is in $PATH, you don't need an absolute path.
+    'path'      => 'pgmapcss',
+    // template to use, e.g. 'mapnik-2.2'
+    'template'  => 'mapnik-2.2',
+);
+
+// You should use a directory which is not reachable by the webserver
+$data_dir = 'data/';
