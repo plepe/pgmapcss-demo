@@ -23,16 +23,21 @@ function map_change_wms(id) {
   if(map_wms_id == id)
     return;
 
-  if(wms)
-      map.removeLayer(wms);
+  if(wms) {
+      wms.wmsParams.layers = id;
 
-  // WMS tilelayer
-  wms = L.imageOverlay.wms("http://192.168.0.130:8000/", {
-    layers: id,
-    format: 'image/png',
-    transparent: true,
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
+      map.removeLayer(wms);
+      wms.addTo(map);
+  }
+  else {
+      // WMS tilelayer
+      wms = L.imageOverlay.wms("http://192.168.0.130:8000/", {
+        layers: id,
+        format: 'image/png',
+        transparent: true,
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+  }
 
   map_wms_id = id;
   History.pushState(null, null, build_params());
