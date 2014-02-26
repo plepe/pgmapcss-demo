@@ -30,13 +30,26 @@ function map_change_wms(id) {
       wms.addTo(map);
   }
   else {
-      // WMS tilelayer
+    if(config.wms.type == 'single') {
+      // WMS singlelayer
       wms = L.imageOverlay.wms(config.wms.base_url, {
         layers: id,
         format: 'image/png',
         transparent: true,
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
+    }
+    else if(config.wms.type == 'tiled') {
+      // WMS tilelayer
+      wms = L.tileLayer.wms(config.wms.base_url, {
+        layers: id,
+        format: 'image/png',
+        transparent: true,
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        tileSize: config.wms.tileSize || 256,
+        reuseTiles: true
+      }).addTo(map);
+    }
   }
 
   map_wms_id = id;

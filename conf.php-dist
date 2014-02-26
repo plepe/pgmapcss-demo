@@ -15,6 +15,13 @@ $pgmapcss = array(
 
 $wms = array(
     'base_url'  => 'http://localhost:8000/',
+
+// What kind of WMS? 'single' or 'tiled'
+#   'type'      => 'single',
+# OR
+    'type'      => 'tiled',
+    'tileSize'  => 1024,
+
 );
 
 // You should use a directory which is not reachable by the webserver
