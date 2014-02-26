@@ -36,7 +36,6 @@ function map_change_wms(id) {
         layers: id,
         format: 'image/png',
         transparent: true,
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
     }
     else if(config.wms.type == 'tiled') {
@@ -45,11 +44,24 @@ function map_change_wms(id) {
         layers: id,
         format: 'image/png',
         transparent: true,
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         tileSize: config.wms.tileSize || 256,
         reuseTiles: true
       }).addTo(map);
     }
+  }
+
+  if('attribution' in config.wms) {
+    if(typeof(config.wms.attribution) == "object")
+      for(var i = 0; i < config.wms.attribution.length; i++)
+        map.attributionControl.addAttribution(config.wms.attribution[i]);
+    else
+      map.attributionControl.addAttribution(config.wms.attribution);
+  }
+  else
+    map.attributionControl.addAttribution('&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors');
+
+  if('attribution_prefix' in config.wms) {
+    map.attributionControl.setPrefix(config.wms.attribution_prefix);
   }
 
   map_wms_id = id;
