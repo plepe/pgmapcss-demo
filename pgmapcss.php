@@ -1,6 +1,18 @@
 <?
+// use only the first n chars to build an id - as many as are needed to be unique, but at least 5.
 function build_id($content) {
-  return 't' . sha1($content);
+  global $data_dir;
+
+  $full_id = sha1($content);
+
+  $char_count = 5;
+  $file = "{$data_dir}/" . substr($full_id, 0, $char_count) . ".mapcss";
+  while(file_exists($file) && (file_get_contents($file) != $content)) {
+    $char_count ++;
+    $file = "{$data_dir}/" . substr($full_id, 0, $char_count) . ".mapcss";
+  }
+
+  return substr($full_id, 0, $char_count);
 }
 
 function ajax_save($param, $content) {
