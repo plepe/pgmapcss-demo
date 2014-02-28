@@ -23,11 +23,19 @@ function ajax_save($param, $content) {
   $id = build_id($content);
   $file = "{$id}.mapcss";
 
+  // File already exists -> it must have compiled at one point, so leave it 
+  // there, even if there's an error compiling
+  $no_delete = false;
+  if(file_exists("{$data_dir}/{$file}"))
+    $no_delete = true;
+
   file_put_contents("{$data_dir}/{$file}", $content);
   $f=adv_exec("{$pgmapcss['path']} -d'{$db['database']}' -u'{$db['user']}' -p'{$db['password']}' -H'{$db['host']}' -t'{$pgmapcss['template']}' '{$file}'", $data_dir, array());
 
   if($f[0] != 0) {
-    unlink("{$data_dir}/{$file}");
+    if(!$no_delete)
+      unlink("{$data_dir}/{$file}");
+
     $id = null;
   }
 
