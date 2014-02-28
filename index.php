@@ -4,6 +4,7 @@
 <html>
   <head>
     <title>pgmapcss demo page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
     <?php print modulekit_to_javascript(); /* pass modulekit configuration to JavaScript */ ?>
     <?php print modulekit_include_js(); /* prints all js-includes */ ?>
     <?php print modulekit_include_css(); /* prints all css-includes */ ?>
@@ -13,17 +14,25 @@ html_export_var(array("config"=>array("wms"=>$wms)));
 print_add_html_headers();
 ?>
   <body>
-<form id='form'>
+<form id='form' class='mode-view'>
 <div id='menu'>
   <span id='title' class='element'><a href='https://github.com/plepe/pgmapcss' target='_new'>pgmapcss</a></span>
-  <span class='element'><input type='submit' value='Update map' /></span>
+  <span class='element mode-selector'><a href='javascript:set_mode("map")'>View</a></span>
+  <span class='element mode-selector'><a href='javascript:set_mode("ide")'>Edit</a></span>
 </div>
 
-<div id='map'></div>
-<div id='ide'>
-<textarea id='editor' name='mapcss_file'></textarea>
+<div id='content'>
+  <div class='page page-map'>
+    <div id='map'></div>
+    <div id='status'>Coord | Version | Map Date</div>
+  </div>
+  <div id='ide' class='page page-ide'>
+    <textarea id='editor' name='mapcss_file'></textarea>
+    <div id='actions'>
+      <input type='submit' value='Update map' />
+    </div>
+  </div>
 </div>
-<div id='status'>Coord | Version | Map Date</div>
 </form>
 </body>
 </html>

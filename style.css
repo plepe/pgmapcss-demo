@@ -17,35 +17,56 @@
   border-right: 1px solid #0000ff;
   color: #ffffff;
 }
-#menu input,
 #menu a {
   border: 1px solid #3f3fff;
   background: none;
   color: #ffffff;
   text-decoration: none;
 }
-#menu input:active {
+#actions {
+  line-height: 28px;
+  height: 36px;
+}
+#actions input {
+  border: 1px solid #0000ff;
+  color: #0000ff;
+}
+#actions input:active {
   border: 1px inset #0000ff;
 }
-#menu input:hover {
-  border: 1px outset #0000ff;
+#actions input:hover {
+  border: 1px solid #0000ff;
+}
+#content {
+  position: absolute;
+  top: 36px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+.page-map {
+  position: absolute;
+  left: 0px;
+  right: 50%;
+  top: 0px;
+  bottom: 0px;
 }
 #map {
   position: absolute;
   left: 0px;
-  top: 36px;
+  right: 0px;
+  top: 0px;
   bottom: 18px;
-  right: 50%;
 }
-#ide {
+.page-ide {
   position: absolute;
   left: 50%;
   right: 0px;
-  bottom: 18px;
-  top: 36px;
+  top: 0px;
+  bottom: 0px;
 }
 #ide textarea {
-  height: 100%;
+  height: calc(100% - 36px);
   width: 100%;
   box-sizing:border-box;
   -moz-box-sizing:border-box; /* Firefox */
@@ -55,4 +76,29 @@
   position: absolute;
   bottom: 0px;
   font-size: 14px;
+}
+
+#menu span.mode-selector {
+  display: none;
+}
+
+@media (max-width: 640px) {
+#menu span.mode-selector {
+  display: inline-block;
+}
+
+.page {
+  display: none;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.mode-ide .page-ide {
+  display: block;
+}
+.mode-map .page-map {
+  display: block;
+}
 }

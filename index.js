@@ -3,6 +3,7 @@ var wms;
 
 window.onload = function() {
   var m;
+  set_mode("map");
 
   // other parts of the code shall initialize too ...
   call_hooks("init");
@@ -52,3 +53,7 @@ History.Adapter.bind(window,'statechange',function() {
     call_hooks("param_change", params);
   }
 });
+
+function set_mode(mode) {
+  document.getElementById("form").className = "mode-" + mode;
+}
