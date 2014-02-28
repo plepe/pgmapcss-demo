@@ -15,14 +15,22 @@ function build_id($content) {
   return substr($full_id, 0, $char_count);
 }
 
+function file_path($id) {
+  global $data_dir;
+
+  return array(
+    'name' => "{$id}.mapcss",
+    'path' => $data_dir,
+  );
+}
+
 function compile($id) {
   global $pgmapcss;
   global $db;
-  global $data_dir;
 
-  $file = "{$id}.mapcss";
+  $file = file_path($id);
 
-  $f=adv_exec("{$pgmapcss['path']} -d'{$db['database']}' -u'{$db['user']}' -p'{$db['password']}' -H'{$db['host']}' -t'{$pgmapcss['template']}' '{$file}'", $data_dir, array());
+  $f=adv_exec("{$pgmapcss['path']} -d'{$db['database']}' -u'{$db['user']}' -p'{$db['password']}' -H'{$db['host']}' -t'{$pgmapcss['template']}' '{$file['name']}'", $file['path'], array());
 
   if($f[0] != 0)
     $id = null;
@@ -37,24 +45,23 @@ function compile($id) {
 function ajax_save($param, $content) {
   global $pgmapcss;
   global $db;
-  global $data_dir;
 
   $id = build_id($content);
-  $file = "{$id}.mapcss";
+  $file = file_path($id);
 
   // File already exists -> it must have compiled at one point, so leave it 
   // there, even if there's an error compiling
   $no_delete = false;
-  if(file_exists("{$data_dir}/{$file}"))
+  if(file_exists("{$file['path']}/{$file['name']}"))
     $no_delete = true;
 
-  file_put_contents("{$data_dir}/{$file}", $content);
+  file_put_contents("{$file['path']}/{$file['name']}", $content);
 
   $result = compile($id);
 
   if($result['status'] != 0) {
     if(!$no_delete)
-      unlink("{$data_dir}/{$file}");
+      unlink("{$file['path']}/{$file['name']}");
   }
 
   return $result;
@@ -69,8 +76,9 @@ function ajax_load($param) {
   if(!preg_match('/^[0-9a-z]+$/i', $id))
     return "WRONG ID!";
 
-  $file = "{$id}.mapcss";
+  $file = file_path($id);
+
   compile($id);
 
-  return file_get_contents("{$data_dir}/{$file}");
+  return file_get_contents("{$file['path']}/{$file['name']}");
 }
