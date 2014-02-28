@@ -15,6 +15,25 @@ function build_id($content) {
   return substr($full_id, 0, $char_count);
 }
 
+function compile($id) {
+  global $pgmapcss;
+  global $db;
+  global $data_dir;
+
+  $file = "{$id}.mapcss";
+
+  $f=adv_exec("{$pgmapcss['path']} -d'{$db['database']}' -u'{$db['user']}' -p'{$db['password']}' -H'{$db['host']}' -t'{$pgmapcss['template']}' '{$file}'", $data_dir, array());
+
+  if($f[0] != 0)
+    $id = null;
+
+  return array(
+    'id'=>$id,
+    'output'=>$f[1],
+    'status'=>$f[0],
+  );
+}
+
 function ajax_save($param, $content) {
   global $pgmapcss;
   global $db;
@@ -30,20 +49,15 @@ function ajax_save($param, $content) {
     $no_delete = true;
 
   file_put_contents("{$data_dir}/{$file}", $content);
-  $f=adv_exec("{$pgmapcss['path']} -d'{$db['database']}' -u'{$db['user']}' -p'{$db['password']}' -H'{$db['host']}' -t'{$pgmapcss['template']}' '{$file}'", $data_dir, array());
 
-  if($f[0] != 0) {
+  $result = compile($id);
+
+  if($result['status'] != 0) {
     if(!$no_delete)
       unlink("{$data_dir}/{$file}");
-
-    $id = null;
   }
 
-  return array(
-    'id'=>$id,
-    'output'=>$f[1],
-    'status'=>$f[0],
-  );
+  return $result;
 }
 
 function ajax_load($param) {
@@ -56,8 +70,7 @@ function ajax_load($param) {
     return "WRONG ID!";
 
   $file = "{$id}.mapcss";
-  // in case we re-initialized the database, compile again
-  $f=adv_exec("{$pgmapcss['path']} -d'{$db['database']}' -u'{$db['user']}' -p'{$db['password']}' -H'{$db['host']}' -t'{$pgmapcss['template']}' '{$file}'", $data_dir, array());
+  compile($id);
 
   return file_get_contents("{$data_dir}/{$file}");
 }
