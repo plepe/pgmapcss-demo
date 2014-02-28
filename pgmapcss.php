@@ -30,7 +30,7 @@ function compile($id) {
 
   $file = file_path($id);
 
-  $f=adv_exec("{$pgmapcss['path']} -d'{$db['database']}' -u'{$db['user']}' -p'{$db['password']}' -H'{$db['host']}' -t'{$pgmapcss['template']}' '{$file['name']}'", $file['path'], array());
+  $f=adv_exec("{$pgmapcss['path']} -d'{$db['database']}' -u'{$db['user']}' -p'{$db['password']}' -H'{$db['host']}' -t'{$pgmapcss['template']}' '{$file['name']}' 2>&1", $file['path'], array());
 
   if($f[0] != 0)
     $id = null;
