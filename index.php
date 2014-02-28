@@ -30,7 +30,7 @@ print_add_html_headers();
     <textarea id='editor' name='mapcss_file'></textarea>
     <div id='actions'>
       <input type='submit' value='Update map' />
-      Docu: <a href='https://github.com/plepe/pgmapcss/blob/master/doc/MapCSS.creole'>MapCSS</a>, <a href='https://github.com/plepe/pgmapcss/blob/master/doc/mapnik-2.2.creole'>Properties</a>
+      Docu: <a href='https://github.com/plepe/pgmapcss/blob/master/doc/MapCSS.creole' target='_new'>MapCSS</a>, <a href='https://github.com/plepe/pgmapcss/blob/master/doc/mapnik-2.2.creole' target='_new'>Properties</a>
     </div>
   </div>
 </div>
