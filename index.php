@@ -24,7 +24,7 @@ print_add_html_headers();
 <div id='content'>
   <div class='page page-map'>
     <div id='map'></div>
-    <div id='status'>Coord | Version | Map Date</div>
+    <div id='status'></div>
   </div>
   <div id='ide' class='page page-ide'>
     <textarea id='editor' name='mapcss_file'></textarea>

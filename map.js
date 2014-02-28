@@ -14,6 +14,25 @@ register_hook("init", function() {
 
   map.on('moveend', function(e) {
     History.replaceState(null, null, build_params());
+
+    var status = [];
+    var tmp;
+
+    if(tmp = map.getZoom())
+      status.push("z" + tmp);
+
+    if(tmp = map.getCenter()) {
+      if(tmp.lat)
+        status.push("Lat: " + tmp.lat.toFixed(4));
+      if(tmp.lng)
+        status.push("Lon: " + tmp.lng.toFixed(4));
+    }
+
+    if(params && params.style)
+        status.push("Style: " + params.style);
+//map.getZoom() + " Lat: "+ map.getCenter().lat.toFixed(4) + " Lon: " + map.getCenter().lon.toFixed(4);
+
+    document.getElementById("status").innerHTML = status.join(" ");
   });
 
   map_wms_id = null;
