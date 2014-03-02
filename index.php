@@ -18,9 +18,9 @@ print_add_html_headers();
 <form id='form' class='mode-view'>
 <div id='menu'>
   <span id='title' class='element'><a href='https://github.com/plepe/pgmapcss' target='_new'>pgmapcss</a></span>
-  <span class='element mode-selector'><a href='javascript:set_mode("map")'>View</a></span>
-  <span class='element mode-selector'><a href='javascript:set_mode("ide")'>Edit</a></span>
-  <span class='element mode-selector'><a href='javascript:set_mode("load")'>Load</a></span>
+  <span class='element mode-selector mode-selector-map'><a href='javascript:set_mode("map")'>View</a></span>
+  <span class='element mode-selector mode-selector-ide'><a href='javascript:set_mode("ide")'>Edit</a></span>
+  <span class='element mode-selector mode-selector-load'><a href='javascript:set_mode("load")'>Load</a></span>
 </div>
 
 <div id='content'>

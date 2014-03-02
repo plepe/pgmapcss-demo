@@ -17,6 +17,9 @@
   border-right: 1px solid #0000ff;
   color: #ffffff;
 }
+#menu span.mode-selector-map {
+  display: none;
+}
 #menu a {
   border: 1px solid #3f3fff;
   background: none;
@@ -44,13 +47,6 @@
   left: 0px;
   right: 0px;
 }
-.page-map {
-  position: absolute;
-  left: 0px;
-  right: 360px;
-  top: 0px;
-  bottom: 0px;
-}
 #map {
   position: absolute;
   left: 0px;
@@ -58,12 +54,27 @@
   top: 0px;
   bottom: 18px;
 }
-.page-ide {
+.page {
   position: absolute;
   width: 360px;
   right: 0px;
   top: 0px;
   bottom: 0px;
+  display: none;
+}
+.page-map {
+  position: absolute;
+  left: 0px;
+  right: 360px;
+  top: 0px;
+  bottom: 0px;
+  width: auto;
+  display: block;
+}
+.mode-ide .page-ide,
+.mode-map .page-ide,
+.mode-load .page-load {
+  display: block;
 }
 #ide textarea {
   height: calc(100% - 36px);
@@ -76,10 +87,6 @@
   position: absolute;
   bottom: 0px;
   font-size: 14px;
-}
-
-#menu span.mode-selector {
-  display: none;
 }
 
 @media (max-width: 640px) {
@@ -97,12 +104,14 @@
   height: auto;
 }
 
-.mode-ide .page-ide {
-  display: block;
+#menu span.mode-selector-map {
+  display: inline;
 }
-.mode-map .page-map {
-  display: block;
+.mode-map .page-ide {
+  display: none;
 }
+.mode-map .page-map,
+.mode-ide .page-ide,
 .mode-load .page-load {
   display: block;
 }
