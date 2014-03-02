@@ -103,4 +103,7 @@
 .mode-map .page-map {
   display: block;
 }
+.mode-load .page-load {
+  display: block;
+}
 }

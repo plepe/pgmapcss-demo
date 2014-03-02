@@ -56,4 +56,6 @@ History.Adapter.bind(window,'statechange',function() {
 
 function set_mode(mode) {
   document.getElementById("form").className = "mode-" + mode;
+
+  call_hooks("show", mode);
 }

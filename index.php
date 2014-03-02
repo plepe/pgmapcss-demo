@@ -20,6 +20,7 @@ print_add_html_headers();
   <span id='title' class='element'><a href='https://github.com/plepe/pgmapcss' target='_new'>pgmapcss</a></span>
   <span class='element mode-selector'><a href='javascript:set_mode("map")'>View</a></span>
   <span class='element mode-selector'><a href='javascript:set_mode("ide")'>Edit</a></span>
+  <span class='element mode-selector'><a href='javascript:set_mode("load")'>Load</a></span>
 </div>
 
 <div id='content'>
@@ -32,6 +33,10 @@ print_add_html_headers();
     <div id='actions'>
       <input type='submit' value='Update map' />
       Docu: <a href='https://github.com/plepe/pgmapcss/blob/master/doc/MapCSS.creole' target='_new'>MapCSS</a>, <a href='https://github.com/plepe/pgmapcss/blob/master/doc/mapnik-2.2.creole' target='_new'>Properties</a>
+    </div>
+  </div>
+  <div id='load' class='page page-load'>
+    <div id='load-list'>
     </div>
   </div>
 </div>
