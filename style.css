@@ -77,7 +77,7 @@
   display: block;
 }
 #ide textarea {
-  height: calc(100% - 36px);
+  height: calc(100% - 38px);
   width: 100%;
   box-sizing:border-box;
   -moz-box-sizing:border-box; /* Firefox */
