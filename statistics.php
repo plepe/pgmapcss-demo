@@ -12,7 +12,14 @@ if($stat_create) {
 register_hook("load", function($id) {
   global $stat;
 
-  $sql_id = $stat->escapeString($id);
+  // remember load time only once per session
+  if(!array_key_exists('statistics_style_loads', $_SESSION))
+    $_SESSION['statistics_style_loads'] = array();
 
+  if(in_array($id, $_SESSION['statistics_style_loads']))
+    return;
+  $_SESSION['statistics_style_loads'][] = $id;
+
+  $sql_id = $stat->escapeString($id);
   $stat->exec("INSERT INTO style_load VALUES ( '{$sql_id}', datetime('now') )");
 });
