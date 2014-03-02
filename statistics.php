@@ -23,3 +23,15 @@ register_hook("load", function($id) {
   $sql_id = $stat->escapeString($id);
   $stat->exec("INSERT INTO style_load VALUES ( '{$sql_id}', datetime('now') )");
 });
+
+function ajax_list($param) {
+  global $stat;
+
+  $ret = array();
+  $res = $stat->query("SELECT style, count(*) c FROM style_load GROUP BY style ORDER BY count(*) DESC LIMIT 40");
+
+  while($elem = $res->fetchArray(SQLITE3_ASSOC))
+    $ret[$elem['style']] = $elem;
+
+  return $ret;
+}
