@@ -44,7 +44,7 @@ function string_to_hash(str) {
   return ret;
 }
 
-History.Adapter.bind(window,'statechange',function() {
+History.Adapter.bind(window, 'statechange', function() {
   var State = History.getState();
   var m;
 
@@ -53,6 +53,14 @@ History.Adapter.bind(window,'statechange',function() {
     call_hooks("param_change", params);
   }
 });
+
+function link(url) {
+  return function(url) {
+    window.History.pushState(null, null, url);
+    set_mode('map');
+    return false;
+  }.bind(this, url);
+}
 
 function set_mode(mode) {
   document.getElementById("form").className = "mode-" + mode;
