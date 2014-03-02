@@ -64,6 +64,8 @@ function ajax_save($param, $content) {
       unlink("{$file['path']}/{$file['name']}");
   }
 
+  call_hooks("load", $id);
+
   return $result;
 }
 
@@ -79,6 +81,8 @@ function ajax_load($param) {
   $file = file_path($id);
 
   compile($id);
+
+  call_hooks("load", $id);
 
   return file_get_contents("{$file['path']}/{$file['name']}");
 }
