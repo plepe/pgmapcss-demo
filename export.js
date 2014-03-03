@@ -3,6 +3,10 @@ var export_form_def = {
     'name': "Type",
     'type': 'select',
     'values': { 'pdf': "PDF", 'svg': "SVG", 'png': "PNG", 'jpg': "JPG" }
+  },
+  'bbox': {
+    'name': "Bounding Box",
+    'type': 'text',
   }
 };
 
@@ -16,6 +20,11 @@ register_hook("show", function(mode) {
     div.removeChild(div.firstChild);
 
   var f = new form("data", export_form_def);
+
+  f.set_data({
+    'bbox': map.getBounds().toBBoxString()
+  });
+
   f.show(div);
 
   var input = document.createElement("input")
@@ -23,6 +32,12 @@ register_hook("show", function(mode) {
   input.value = "Export";
   input.onclick = export_do.bind(this, f);
   div.appendChild(input);
+
+  register_hook("map_move", function(f) {
+    f.set_data({
+      'bbox': map.getBounds().toBBoxString()
+    });
+  }.bind(this, f));
 });
 
 function export_do(f) {

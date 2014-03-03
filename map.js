@@ -33,6 +33,8 @@ register_hook("init", function() {
 //map.getZoom() + " Lat: "+ map.getCenter().lat.toFixed(4) + " Lon: " + map.getCenter().lon.toFixed(4);
 
     document.getElementById("status").innerHTML = status.join(" ");
+
+    call_hooks("map_move");
   });
 
   map_wms_id = null;
