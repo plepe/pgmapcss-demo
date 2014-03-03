@@ -16,6 +16,7 @@ $include = array(
     'map.js',
     'ide.js',
     'load.js',
+    'export.js',
   ),
   'css'=>array(
     'lib/leaflet/leaflet.css',

@@ -44,9 +44,6 @@ print_add_html_headers();
     </div>
   </div>
   <div id='export' class='page page-export'>
-    <div id='actions'>
-      <input type='submit' name='export' value='Export' />
-    </div>
   </div>
 </div>
 </form>
