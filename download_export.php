@@ -8,9 +8,10 @@ if(!preg_match("/^[a-z0-9][a-z0-9\.]+$/", $_REQUEST['job'])) {
   exit;
 }
 
-Header("Content-Type: application/octet-stream");
-
 global $data_dir;
 chdir($data_dir);
+
+Header("Content-Type: " . mime_content_type($_REQUEST['job']));
+Header("Content-Disposition: attachment; filename={$_REQUEST['job']}");
 
 readfile($_REQUEST['job']);
