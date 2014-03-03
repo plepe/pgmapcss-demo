@@ -3,3 +3,9 @@
 <?php
 session_start('pgmapcss-demo');
 
+Header("Content-Type: application/octet-stream");
+
+global $data_dir;
+chdir($data_dir);
+
+readfile($_REQUEST['job']);
