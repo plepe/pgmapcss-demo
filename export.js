@@ -9,9 +9,14 @@ var export_form_def = {
     'type': 'text',
   }
 };
+var export_job = null;
+var export_interval = null;
 
 register_hook("show", function(mode) {
   if(mode != "export")
+    return;
+
+  if(export_job !== null)
     return;
 
   var div = document.getElementById("export");
@@ -41,12 +46,52 @@ register_hook("show", function(mode) {
   register_hook("hide", function(f) {
     unregister_hooks_object(f);
 
-    var div = document.getElementById("export");
-    while(div.firstChild)
-      div.removeChild(div.firstChild);
+    if(export_job === null) {
+      var div = document.getElementById("export");
+      while(div.firstChild)
+        div.removeChild(div.firstChild);
+    }
   }.bind(this, f), f);
 });
 
-function export_do(f) {
-  alert(JSON.stringify(f.get_data(), null, '  '));
+function export_do(f, input) {
+  var param = f.get_data();
+  param.style = params.style;
+
+  export_job = true;
+  ajax("export", param, null, function(v) {
+    export_job = v;
+    export_interval = setInterval(function() {
+      ajax("export_done", { 'job': export_job }, null, function(v) {
+        if(v)
+        export_done();
+      });
+    }, 5000);
+  });
+
+  var div = document.getElementById("export");
+  while(div.firstChild)
+    div.removeChild(div.firstChild);
+
+  div.innerHTML = "Waiting ...";
+}
+
+function export_done() {
+  clearInterval(export_interval);
+
+  var div = document.getElementById("export");
+  while(div.firstChild)
+    div.removeChild(div.firstChild);
+
+  var a = document.createElement("a");
+  a.href = 'download_export.php?job=' + export_job;
+  a.target = '_new';
+  a.appendChild(document.createTextNode("Download"));
+  a.onclick = function() {
+    export_job = null;
+  };
+
+  div.appendChild(a);
+
+  export_interval = null;
 }

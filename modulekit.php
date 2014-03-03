@@ -7,6 +7,7 @@ $include = array(
   'php'=>array(
     'pgmapcss.php',
     'statistics.php',
+    'export.php',
   ),
   'js'=>array(
     'lib/leaflet/leaflet.js',
