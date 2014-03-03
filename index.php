@@ -21,6 +21,7 @@ print_add_html_headers();
   <span class='element mode-selector mode-selector-map'><a href='javascript:set_mode("map")'>View</a></span>
   <span class='element mode-selector mode-selector-ide'><a href='javascript:set_mode("ide")'>Edit</a></span>
   <span class='element mode-selector mode-selector-load'><a href='javascript:set_mode("load")'>Load</a></span>
+  <span class='element mode-selector mode-selector-export'><a href='javascript:set_mode("export")'>Export</a></span>
 </div>
 
 <div id='content'>
@@ -37,6 +38,11 @@ print_add_html_headers();
   </div>
   <div id='load' class='page page-load'>
     <div id='load-list'>
+    </div>
+  </div>
+  <div id='export' class='page page-export'>
+    <div id='actions'>
+      <input type='submit' name='export' value='Export' />
     </div>
   </div>
 </div>

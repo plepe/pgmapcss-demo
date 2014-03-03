@@ -73,7 +73,8 @@
 }
 .mode-ide .page-ide,
 .mode-map .page-ide,
-.mode-load .page-load {
+.mode-load .page-load,
+.mode-export .page-export {
   display: block;
 }
 #ide textarea {
@@ -112,7 +113,8 @@
 }
 .mode-map .page-map,
 .mode-ide .page-ide,
-.mode-load .page-load {
+.mode-load .page-load,
+.mode-export .page-export {
   display: block;
 }
 }
