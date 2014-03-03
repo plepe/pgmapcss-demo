@@ -63,6 +63,9 @@ function link(url) {
 }
 
 function set_mode(mode) {
+  var old_mode = document.getElementById("form").className.substr(5);
+  call_hooks("hide", old_mode);
+
   document.getElementById("form").className = "mode-" + mode;
 
   call_hooks("show", mode);

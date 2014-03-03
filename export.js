@@ -37,7 +37,14 @@ register_hook("show", function(mode) {
     f.set_data({
       'bbox': map.getBounds().toBBoxString()
     });
-  }.bind(this, f));
+  }.bind(this, f), f);
+  register_hook("hide", function(f) {
+    unregister_hooks_object(f);
+
+    var div = document.getElementById("export");
+    while(div.firstChild)
+      div.removeChild(div.firstChild);
+  }.bind(this, f), f);
 });
 
 function export_do(f) {
