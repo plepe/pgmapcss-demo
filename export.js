@@ -60,6 +60,11 @@ function export_do(f, input) {
 
   export_job = true;
   ajax("export", param, null, function(v) {
+    if(v === null) {
+      alert("An error occured!");
+      return;
+    }
+
     export_job = v;
     export_interval = setInterval(function() {
       ajax("export_done", { 'job': export_job }, null, function(v) {

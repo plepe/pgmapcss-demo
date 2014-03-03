@@ -3,6 +3,11 @@
 <?php
 session_start('pgmapcss-demo');
 
+if(!preg_match("/^[a-z0-9][a-z0-9\.]+$/", $_REQUEST['job'])) {
+  print "An error occured!";
+  exit;
+}
+
 Header("Content-Type: application/octet-stream");
 
 global $data_dir;
