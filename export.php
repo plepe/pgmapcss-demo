@@ -1,7 +1,5 @@
 <?
 function ajax_export($param) {
-  global $data_dir;
-
   // check params
   if(!in_array($param['type'], array("png", "svg", "pdf", "jpg")))
     return null;
@@ -12,12 +10,11 @@ function ajax_export($param) {
   if(!preg_match("/^[a-z0-9\.]+$/", $param['scale']))
     return null;
 
-  $job_id = sha1(uniqid()) . "." . $param['type'];
+  $param['job_id'] = sha1(uniqid()) . "." . $param['type'];
 
-  chdir($data_dir);
-  shell_exec("mapnik-render-image -b {$param['bbox']} --scale={$param['scale']} -o {$job_id} {$param['style']}.mapnik 2>&1 >{$job_id}.debug");
+  shell_exec("php render.php '" . serialize($param) . "' 2>/dev/null >/dev/null&");
 
-  return $job_id;
+  return $param['job_id'];
 }
 
 function ajax_export_done($param) {
