@@ -2,7 +2,8 @@ var export_form_def = {
   'type': {
     'name': "Type",
     'type': 'select',
-    'values': { 'pdf': "PDF", 'svg': "SVG", 'png': "PNG", 'jpg': "JPG" }
+    'values': { 'pdf': "PDF", 'svg': "SVG", 'png': "PNG", 'jpg': "JPG" },
+    'req': true
   },
   'bbox': {
     'name': "Bounding Box",
@@ -61,6 +62,11 @@ register_hook("show", function(mode) {
 });
 
 function export_do(f, input) {
+  if(!f.is_complete()) {
+    f.show_errors();
+    return;
+  }
+
   var param = f.get_data();
   param.style = params.style;
 
