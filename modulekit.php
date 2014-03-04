@@ -5,6 +5,7 @@ $depend = array(
 
 $include = array(
   'php'=>array(
+    'db.php',
     'pgmapcss.php',
     'statistics.php',
     'export.php',
