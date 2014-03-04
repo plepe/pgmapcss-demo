@@ -80,6 +80,9 @@ function ajax_load($param) {
 
   $file = file_path($id);
 
+  if(!file_exists("{$file['path']}/{$file['name']}"))
+    return null;
+
   compile($id);
 
   call_hooks("load", $id);

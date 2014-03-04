@@ -106,7 +106,8 @@ register_hook("param_change", function(params) {
 });
 
 register_hook("build_params", function(params) {
-  params.style = map_wms_id;
+  if(map_wms_id)
+    params.style = map_wms_id;
 
   params.zoom = map.getZoom();
   var c = map.getCenter();

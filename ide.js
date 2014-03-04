@@ -29,7 +29,15 @@ register_hook("param_change", function(params) {
   if(('style' in params) && (ide_current_style != params.style))
     ajax("load", { 'id': params.style }, null, function(data) {
       var form = document.getElementById("form");
-      form.elements.mapcss_file.value = data;
+
+      if(data === null) {
+        form.elements.mapcss_file.value = "";
+        call_hooks("param_change", { 'style': null });
+      }
+      else {
+        form.elements.mapcss_file.value = data;
+      }
+
     });
 
   ide_current_style = params.style;
