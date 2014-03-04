@@ -16,6 +16,7 @@ var export_form_def = {
 };
 var export_job = null;
 var export_interval = null;
+var export_div_status = null;
 
 register_hook("show", function(mode) {
   if(mode != "export")
@@ -38,11 +39,14 @@ register_hook("show", function(mode) {
 
   f.show(div);
 
+  export_div_status = document.createElement("div");
+
   var input = document.createElement("input")
   input.type = "button";
   input.value = "Export";
   input.onclick = export_do.bind(this, f);
-  div.appendChild(input);
+  export_div_status.appendChild(input);
+  div.appendChild(export_div_status);
 
   register_hook("map_move", function(f) {
     f.set_data({
@@ -86,19 +90,14 @@ function export_do(f, input) {
     }, 5000);
   });
 
-  var div = document.getElementById("export");
-  while(div.firstChild)
-    div.removeChild(div.firstChild);
-
-  div.innerHTML = "Waiting ...";
+  export_div_status.innerHTML = "Waiting ...";
 }
 
 function export_done() {
   clearInterval(export_interval);
 
-  var div = document.getElementById("export");
-  while(div.firstChild)
-    div.removeChild(div.firstChild);
+  while(export_div_status.firstChild)
+    export_div_status.removeChild(export_div_status.firstChild);
 
   var a = document.createElement("a");
   a.href = 'download_export.php?job=' + export_job;
@@ -108,7 +107,7 @@ function export_done() {
     export_job = null;
   };
 
-  div.appendChild(a);
+  export_div_status.appendChild(a);
 
   export_interval = null;
 }
