@@ -33,6 +33,8 @@ register_hook("param_change", function(params) {
       if(data === null) {
         form.elements.mapcss_file.value = "";
         call_hooks("param_change", { 'style': null });
+
+        update_status();
       }
       else {
         form.elements.mapcss_file.value = data;
