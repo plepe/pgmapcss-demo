@@ -15,10 +15,7 @@ window.onload = function() {
   }
 }.bind(this);
 
-function build_params() {
-  var params = {};
-  call_hooks("build_params", params);
-
+function build_params(params) {
   var j = [];
   for(var k in params)
     j.push(k + '=' + params[k]);
@@ -71,8 +68,14 @@ function set_mode(mode) {
   call_hooks("show", mode);
 }
 
-function update_status() {
-  History.replaceState(null, null, build_params());
+function update_status(push) {
+  params = {}
+  call_hooks("build_status", params);
+
+  if(push)
+    History.pushState(null, null, build_params(params));
+  else
+    History.replaceState(null, null, build_params(params));
 
   var status = [];
   var tmp;

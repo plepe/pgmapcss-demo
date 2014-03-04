@@ -67,7 +67,7 @@ function map_change_wms(id) {
   }
 
   map_wms_id = id;
-  History.pushState(null, null, build_params());
+  update_status(true);
 }
 
 register_hook("style_save", function(ob) {
@@ -86,7 +86,7 @@ register_hook("param_change", function(params) {
         map.panTo([ params.lat, params.lon ]);
 });
 
-register_hook("build_params", function(params) {
+register_hook("build_status", function(params) {
   if(map_wms_id)
     params.style = map_wms_id;
 
