@@ -88,9 +88,9 @@ function export_do(f, input) {
     export_interval = setInterval(function() {
       ajax("export_done", { 'job': export_job }, null, function(v) {
         if(v)
-        export_done();
+          export_done();
       });
-    }, 5000);
+    }, 1000);
   });
 
   export_div_status.innerHTML = "Waiting ...";
