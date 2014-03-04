@@ -105,8 +105,12 @@
   height: auto;
 }
 
+#menu span.element {
+  padding-left: 0.1em;
+  padding-right: 0.1em;
+}
 #menu span.mode-selector-map {
-  display: inline;
+  display: inline-block;
 }
 .mode-map .page-ide {
   display: none;
