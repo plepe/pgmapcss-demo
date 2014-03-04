@@ -7,7 +7,9 @@ var export_form_def = {
   },
   'bbox': {
     'name': "Bounding Box",
-    'type': 'text'
+    'type': 'textarea',
+    'check': [ "regexp", "^\-?[0-9]+(\.[0-9]+)?,\-?[0-9]+(\.[0-9]+)?,\-?[0-9]+(\.[0-9]+)?,\-?[0-9]+(\.[0-9]+)?$", "Expecting four coordinates, separated by colon." ],
+    'html_attributes': { 'style': 'min-height: 0;' }
   },
   'scale': {
     'name': "Scale",
