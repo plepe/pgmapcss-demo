@@ -72,6 +72,7 @@ function export_do(f, input) {
   }
 
   var param = f.get_data();
+  f.reset();
   param.style = params.style;
 
   export_job = true;
