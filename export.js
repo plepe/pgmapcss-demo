@@ -6,7 +6,11 @@ var export_form_def = {
   },
   'bbox': {
     'name': "Bounding Box",
-    'type': 'text',
+    'type': 'text'
+  },
+  'scale': {
+    'name': "Scale",
+    'type': 'float'
   }
 };
 var export_job = null;
@@ -27,7 +31,8 @@ register_hook("show", function(mode) {
   var f = new form("data", export_form_def);
 
   f.set_data({
-    'bbox': map.getBounds().toBBoxString()
+    'bbox': map.getBounds().toBBoxString(),
+    'scale': 559082264.028 / Math.pow(2, map.getZoom())
   });
 
   f.show(div);
@@ -40,7 +45,8 @@ register_hook("show", function(mode) {
 
   register_hook("map_move", function(f) {
     f.set_data({
-      'bbox': map.getBounds().toBBoxString()
+      'bbox': map.getBounds().toBBoxString(),
+      'scale': 559082264.028 / Math.pow(2, map.getZoom())
     });
   }.bind(this, f), f);
   register_hook("hide", function(f) {

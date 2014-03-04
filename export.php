@@ -9,11 +9,13 @@ function ajax_export($param) {
     return null;
   if(!preg_match("/^[a-z0-9]+$/", $param['style']))
     return null;
+  if(!preg_match("/^[a-z0-9\.]+$/", $param['scale']))
+    return null;
 
   $job_id = sha1(uniqid()) . "." . $param['type'];
 
   chdir($data_dir);
-  shell_exec("mapnik-render-image -b {$param['bbox']} --scale=8000 -o {$job_id} {$param['style']}.mapnik 2>&1 >{$job_id}.debug");
+  shell_exec("mapnik-render-image -b {$param['bbox']} --scale={$param['scale']} -o {$job_id} {$param['style']}.mapnik 2>&1 >{$job_id}.debug");
 
   return $job_id;
 }
