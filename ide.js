@@ -26,21 +26,29 @@ function process_form(foo) {
 }
 
 register_hook("param_change", function(params) {
-  if(('style' in params) && (ide_current_style != params.style))
+  if(('style' in params) && (ide_current_style != params.style)) {
+    var form = document.getElementById("form");
+    if(form) {
+      form.elements.mapcss_file.value = "";
+      form.elements.mapcss_file.disabled = true;
+    }
+
     ajax("load", { 'id': params.style }, null, function(data) {
-      var form = document.getElementById("form");
+      if(form)
+        form.elements.mapcss_file.disabled = false;
 
       if(data === null) {
-        form.elements.mapcss_file.value = "";
         call_hooks("param_change", { 'style': null });
 
         update_status();
       }
       else {
-        form.elements.mapcss_file.value = data;
+        if(form)
+          form.elements.mapcss_file.value = data;
       }
 
     });
 
-  ide_current_style = params.style;
+    ide_current_style = params.style;
+  }
 });
