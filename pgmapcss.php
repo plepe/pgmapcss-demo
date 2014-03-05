@@ -83,9 +83,11 @@ function ajax_load($param) {
   if(!file_exists("{$file['path']}/{$file['name']}"))
     return null;
 
-  compile($id);
+  $result = compile($id);
 
   call_hooks("load", $id);
 
-  return file_get_contents("{$file['path']}/{$file['name']}");
+  $result['content'] = file_get_contents("{$file['path']}/{$file['name']}");
+
+  return $result;
 }
