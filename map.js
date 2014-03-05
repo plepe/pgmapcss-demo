@@ -75,8 +75,15 @@ register_hook("style_save", function(ob) {
 });
 
 register_hook("param_change", function(params) {
-  if('style' in params)
-    map_change_wms(params.style);
+  if('style' in params) {
+    if(params.style == null) {
+      wms.wmsParams.layers = null;
+      map.removeLayer(wms);
+    }
+    else {
+      map_change_wms(params.style);
+    }
+  }
 
   if('zoom' in params)
     map.setZoom(params.zoom);
