@@ -13,13 +13,20 @@ register_hook("init", function() {
   });
   base_osm.addTo(map);
 
+  // empty background layer
+  base_empty = L.tileLayer('', {
+  });
+
   map.on('moveend', function(e) {
     update_status();
 
     call_hooks("map_move");
   });
 
-  layer_control = L.control.layers({ "OSM Mapnik": base_osm }, {});
+  layer_control = L.control.layers({
+      "OSM Mapnik": base_osm,
+      "Empty Background": base_empty,
+  }, {});
   layer_control.addTo(map);
 
   map_wms_id = null;
