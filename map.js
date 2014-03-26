@@ -8,15 +8,19 @@ register_hook("init", function() {
   map = L.map('map').setView([48.21, 16.38], 13);
 
   // add an OpenStreetMap tile layer
-  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+  base_osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
+  });
+  base_osm.addTo(map);
 
   map.on('moveend', function(e) {
     update_status();
 
     call_hooks("map_move");
   });
+
+  layer_control = L.control.layers({ "OSM Mapnik": base_osm }, {});
+  layer_control.addTo(map);
 
   map_wms_id = null;
 });
@@ -50,6 +54,8 @@ function map_change_wms(id) {
         reuseTiles: true
       }).addTo(map);
     }
+
+    layer_control.addOverlay(wms, "pgmapcss overlay");
   }
 
   if('attribution' in config.wms) {
