@@ -9,6 +9,7 @@ call_hooks("init");
   <head>
     <title>pgmapcss demo page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <script type='text/javascript' src="lib/leaflet/leaflet.js"></script>
     <?php print modulekit_to_javascript(); /* pass modulekit configuration to JavaScript */ ?>
     <?php print modulekit_include_js(); /* prints all js-includes */ ?>
     <?php print modulekit_include_css(); /* prints all css-includes */ ?>
