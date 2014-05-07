@@ -6,9 +6,9 @@ register_hook("init", function() {
 });
 
 function process_form(foo) {
-  form = document.getElementById("form");
+  dom_form = document.getElementById("form");
 
-  content = form.elements.mapcss_file.value;
+  content = dom_form.elements.mapcss_file.value;
   ajax("save", null, content, function(v) {
     if(!v) {
       alert("An unknown error occured!");
@@ -29,15 +29,15 @@ register_hook("param_change", function(params) {
   if(('style' in params) &&
      (params.style != null) &&
      (ide_current_style != params.style)) {
-    var form = document.getElementById("form");
-    if(form) {
-      form.elements.mapcss_file.value = "";
-      form.elements.mapcss_file.disabled = true;
+    var dom_form = document.getElementById("form");
+    if(dom_form) {
+      dom_form.elements.mapcss_file.value = "";
+      dom_form.elements.mapcss_file.disabled = true;
     }
 
     ajax("load", { 'id': params.style }, null, function(v) {
-      if(form)
-        form.elements.mapcss_file.disabled = false;
+      if(dom_form)
+        dom_form.elements.mapcss_file.disabled = false;
 
       if(v === null) {
         call_hooks("param_change", { 'style': null });
@@ -45,8 +45,8 @@ register_hook("param_change", function(params) {
         update_status();
       }
       else {
-        if(form)
-          form.elements.mapcss_file.value = v.content;
+        if(dom_form)
+          dom_form.elements.mapcss_file.value = v.content;
 
         if(v.status != 0)
           alert("Error compiling style file:\n" + v.output);
