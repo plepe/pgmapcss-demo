@@ -50,3 +50,13 @@ print_add_html_headers();
 </form>
 </body>
 </html>
+
+<?
+if($_REQUEST['style']) {
+  $id = $_REQUEST['style'];
+  if(!preg_match('/^[0-9a-z]+$/i', $id))
+    return "WRONG ID!";
+
+  if(file_exists("{$file['path']}/{$file['name']}"))
+    compile($id);
+}
