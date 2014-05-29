@@ -58,6 +58,16 @@ register_hook("show", function(mode) {
     'scale': 559082264.028 / Math.pow(2, map.getZoom())
   });
 
+  export_form.onchange = function() {
+    var d = export_form.get_data();
+
+    if(export_bbox) {
+      d = d['bbox'].split(',');
+      var b = L.latLngBounds(L.latLng(parseFloat(d[1]), parseFloat(d[0])), L.latLng(parseFloat(d[3]), parseFloat(d[2])));
+      export_bbox.setBounds(b);
+    }
+  };
+
   if(L.LocationFilter) {
     export_bbox = new L.LocationFilter().addTo(map);
     export_bbox.on("change", function(e) {
