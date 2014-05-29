@@ -19,6 +19,7 @@ var export_form_def = {
 var export_job = null;
 var export_interval = null;
 var export_div_status = null;
+var export_form;
 
 register_hook("show", function(mode) {
   if(mode != "export")
@@ -32,49 +33,49 @@ register_hook("show", function(mode) {
   while(div.firstChild)
     div.removeChild(div.firstChild);
 
-  var f = new form("data", export_form_def);
+  export_form = new form("data", export_form_def);
 
-  f.set_data({
+  export_form.set_data({
     'bbox': map.getBounds().toBBoxString(),
     'scale': 559082264.028 / Math.pow(2, map.getZoom())
   });
 
-  f.show(div);
+  export_form.show(div);
 
   export_div_status = document.createElement("div");
 
   var input = document.createElement("input")
   input.type = "button";
   input.value = "Export";
-  input.onclick = export_do.bind(this, f);
+  input.onclick = export_do;
   export_div_status.appendChild(input);
   div.appendChild(export_div_status);
 
-  register_hook("map_move", function(f) {
-    f.set_data({
+  register_hook("map_move", function() {
+    export_form.set_data({
       'bbox': map.getBounds().toBBoxString(),
       'scale': 559082264.028 / Math.pow(2, map.getZoom())
     });
-  }.bind(this, f), f);
-  register_hook("hide", function(f) {
-    unregister_hooks_object(f);
+  });
+  register_hook("hide", function() {
+    unregister_hooks_object(export_form);
 
     if(export_job === null) {
       var div = document.getElementById("export");
       while(div.firstChild)
         div.removeChild(div.firstChild);
     }
-  }.bind(this, f), f);
+  });
 });
 
-function export_do(f, input) {
-  if(!f.is_complete()) {
-    f.show_errors();
+function export_do(input) {
+  if(!export_form.is_complete()) {
+    export_form.show_errors();
     return;
   }
 
-  var param = f.get_data();
-  f.reset();
+  var param = export_form.get_data();
+  export_form.reset();
   param.style = params.style;
 
   export_job = true;
@@ -101,6 +102,14 @@ function export_done() {
 
   while(export_div_status.firstChild)
     export_div_status.removeChild(export_div_status.firstChild);
+
+  var input = document.createElement("input")
+  input.type = "button";
+  input.value = "Export again";
+  input.onclick = export_do;
+  export_div_status.appendChild(input);
+
+  export_div_status.appendChild(document.createTextNode(" "));
 
   var a = document.createElement("a");
   a.href = 'download_export.php?job=' + export_job;
