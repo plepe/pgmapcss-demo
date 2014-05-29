@@ -10,9 +10,11 @@ call_hooks("init");
     <title>pgmapcss demo page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
     <script type='text/javascript' src="lib/leaflet/leaflet.js"></script>
+    <script type='text/javascript' src="lib/leaflet-locationfilter/src/locationfilter.js"></script>
     <?php print modulekit_to_javascript(); /* pass modulekit configuration to JavaScript */ ?>
     <?php print modulekit_include_js(); /* prints all js-includes */ ?>
     <?php print modulekit_include_css(); /* prints all css-includes */ ?>
+    <link rel='stylesheet' type='text/css' href="lib/leaflet-locationfilter/src/locationfilter.css">
   </head>
 <?php
 html_export_var(array("config"=>array("wms"=>$wms)));

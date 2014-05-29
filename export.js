@@ -37,6 +37,7 @@ var export_job = null;
 var export_interval = null;
 var export_div_status = null;
 var export_form;
+var export_bbox;
 
 register_hook("show", function(mode) {
   if(mode != "export")
@@ -57,6 +58,18 @@ register_hook("show", function(mode) {
     'scale': 559082264.028 / Math.pow(2, map.getZoom())
   });
 
+  if(L.LocationFilter) {
+    export_bbox = new L.LocationFilter().addTo(map);
+    export_bbox.on("change", function(e) {
+      export_form.set_data({
+        'bbox': export_bbox.getBounds().toBBoxString()
+      });
+    });
+    export_bbox.on("disabled", function() {
+      export_form.set_data({ 'bbox': map.getBounds().toBBoxString() });
+    });
+  }
+
   export_form.show(div);
 
   export_div_status = document.createElement("div");
@@ -69,10 +82,14 @@ register_hook("show", function(mode) {
   div.appendChild(export_div_status);
 
   register_hook("map_move", function() {
-    export_form.set_data({
-      'bbox': map.getBounds().toBBoxString(),
+    var new_data = {
       'scale': 559082264.028 / Math.pow(2, map.getZoom())
-    });
+    };
+
+    if((!export_bbox) || (!export_bbox.isEnabled()))
+      new_data.bbox = map.getBounds().toBBoxString();
+
+    export_form.set_data(new_data);
   });
   register_hook("hide", function() {
     unregister_hooks_object(export_form);
@@ -81,6 +98,12 @@ register_hook("show", function(mode) {
       var div = document.getElementById("export");
       while(div.firstChild)
         div.removeChild(div.firstChild);
+    }
+
+    if(export_bbox) {
+      map.removeLayer(export_bbox);
+      delete(export_bbox);
+      export_bbox = null;
     }
   });
 });

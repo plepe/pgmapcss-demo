@@ -7,3 +7,5 @@ apt-get install php5-sqlite
 Dowload leaflet from http://leafletjs.com/download.html and unzip to lib/leaflet/
 
 Download history.js from https://github.com/browserstate/history.js and unzip to lib/browserstate-history.js
+
+Download https://github.com/kajic/leaflet-locationfilter/ into lib/leaflet-locationfilter
