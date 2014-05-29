@@ -69,8 +69,12 @@ register_hook("show", function(mode) {
   };
 
   if(L.LocationFilter) {
-    if(!export_bbox)
+    if(!export_bbox) {
       export_bbox = new L.LocationFilter();
+
+      // when creating bbox object set to map bounds minus 20%
+      export_bbox.setBounds(map.getBounds().pad(-0.2));
+    }
 
     export_bbox.addTo(map);
     export_bbox.enable();
