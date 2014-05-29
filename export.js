@@ -69,7 +69,11 @@ register_hook("show", function(mode) {
   };
 
   if(L.LocationFilter) {
-    export_bbox = new L.LocationFilter().addTo(map);
+    if(!export_bbox)
+      export_bbox = new L.LocationFilter();
+
+    export_bbox.addTo(map);
+    export_bbox.enable();
     export_bbox.on("change", function(e) {
       export_form.set_data({
         'bbox': export_bbox.getBounds().toBBoxString()
@@ -112,8 +116,6 @@ register_hook("show", function(mode) {
 
     if(export_bbox) {
       map.removeLayer(export_bbox);
-      delete(export_bbox);
-      export_bbox = null;
     }
   });
 });
