@@ -86,6 +86,9 @@ register_hook("show", function(mode) {
     export_bbox.on("disabled", function() {
       export_form.set_data({ 'bbox': map.getBounds().toBBoxString() });
     });
+    export_bbox.on("enabled", function() {
+      export_form.set_data({ 'bbox': export_bbox.getBounds().toBBoxString() });
+    });
   }
 
   export_form.show(div);
