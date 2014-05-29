@@ -11,9 +11,26 @@ var export_form_def = {
     'check': [ "regexp", "^\-?[0-9]+(\.[0-9]+)?,\-?[0-9]+(\.[0-9]+)?,\-?[0-9]+(\.[0-9]+)?,\-?[0-9]+(\.[0-9]+)?$", "Expecting four coordinates, separated by colon." ],
     'html_attributes': { 'style': 'min-height: 0;' }
   },
+  'width': {
+    'type': 'integer',
+    'name': "Width (pixels)",
+    'desc': "if empty it will be automatically calculated from scale"
+  },
+  'height': {
+    'type': 'integer',
+    'name': "Height (pixels)",
+    'desc': "if empty it will be automatically calculated from scale"
+  },
   'scale': {
     'name': "Scale",
-    'type': 'float'
+    'type': 'float',
+    'desc': "ignored when <i>width</i> or <i>height</i> are given"
+  },
+  'aspect-fix': {
+    'name': "Aspect fix mode",
+    'type': 'select',
+    'values': [ 'GROW_BBOX', 'GROW_CANVAS', 'SHRINK_BBOX', 'SHRINK_CANVAS' ],
+    'default': 'GROW_BBOX'
   }
 };
 var export_job = null;

@@ -9,6 +9,18 @@ function ajax_export($param) {
     return null;
   if(!preg_match("/^[a-z0-9\.]+$/", $param['scale']))
     return null;
+  if($param['width'] && ($param['width'] == ""))
+    unset($param['width']);
+  elseif($param['width'] && (!preg_match("/^[0-9]+$/", $param['width'])))
+    return null;
+  if($param['height'] && ($param['height'] == ""))
+    unset($param['height']);
+  elseif($param['height'] && (!preg_match("/^[0-9]+$/", $param['height'])))
+    return null;
+  if($param['aspect-fix'] && ($param['aspect-fix'] == ""))
+    unset($param['aspect-fix']);
+  elseif($param['aspect-fix'] && (!in_array($param['aspect-fix'], array("GROW_BBOX", "GROW_CANVAS", "SHRINK_BBOX", "SHRINK_CANVAS"))))
+    return null;
 
   $param['job_id'] = sha1(uniqid()) . "." . $param['type'];
 
