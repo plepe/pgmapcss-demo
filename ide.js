@@ -1,5 +1,3 @@
-var ide_current_style;
-
 register_hook("init", function() {
   // Bind IDE to function
   document.getElementById("form").onsubmit = process_form;
@@ -15,11 +13,11 @@ function process_form(foo) {
     }
 
     if(v.status == 0) {
+      ide_current_style = v.id;
       call_hooks("style_save", v);
     }
-    else {
-      alert("Error compiling style file:\n" + v.output);
-    }
+
+    alert(v.output);
   });
 
   return false;

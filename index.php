@@ -17,7 +17,7 @@ call_hooks("init");
     <link rel='stylesheet' type='text/css' href="lib/leaflet-locationfilter/src/locationfilter.css">
   </head>
 <?php
-html_export_var(array("config"=>array("wms"=>$wms)));
+html_export_var(array("config"=>array("wms"=>$wms), "ide_current_style"=>$_REQUEST['style']));
 print_add_html_headers();
 ?>
   <body>
@@ -36,7 +36,12 @@ print_add_html_headers();
     <div id='status'></div>
   </div>
   <div id='ide' class='page page-ide'>
-    <textarea id='editor' name='mapcss_file'></textarea>
+    <textarea id='editor' name='mapcss_file'><?
+if($_REQUEST['style']) {
+  if($result = ajax_load(array("id"=>$_REQUEST['style'])))
+    print $result['content'];
+}
+?></textarea>
     <div id='actions'>
       <input type='submit' value='Update map' />
       Docu: <a href='https://github.com/plepe/pgmapcss/blob/master/doc/MapCSS.creole' target='_new'>MapCSS</a>, <a href='https://github.com/plepe/pgmapcss/blob/master/doc/mapnik-2.2.creole' target='_new'>Properties</a>
@@ -52,13 +57,3 @@ print_add_html_headers();
 </form>
 </body>
 </html>
-
-<?
-if($_REQUEST['style']) {
-  $id = $_REQUEST['style'];
-  if(!preg_match('/^[0-9a-z]+$/i', $id))
-    return "WRONG ID!";
-
-  if(file_exists("{$file['path']}/{$file['name']}"))
-    compile($id);
-}
