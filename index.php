@@ -44,7 +44,7 @@ if($_REQUEST['style']) {
 ?></textarea>
     <div id='actions'>
       <input type='submit' value='Update map' />
-      Docu: <a href='https://github.com/plepe/pgmapcss/blob/master/doc/MapCSS.creole' target='_new'>MapCSS</a>, <a href='https://github.com/plepe/pgmapcss/blob/master/doc/mapnik-2.2.creole' target='_new'>Properties</a>
+      Docu: <a href='https://github.com/plepe/pgmapcss/blob/master/doc/MapCSS.creole' target='_new'>MapCSS</a>, <a href='https://github.com/plepe/pgmapcss/blob/master/doc/<?=$pgmapcss['template']?>.md' target='_new'>Properties</a>
     </div>
   </div>
   <div id='load' class='page page-load'>
