@@ -28,6 +28,7 @@ print_add_html_headers();
   <span class='element mode-selector mode-selector-ide'><a href='javascript:set_mode("ide")'>Edit</a></span>
   <span class='element mode-selector mode-selector-load'><a href='javascript:set_mode("load")'>Load</a></span>
   <span class='element mode-selector mode-selector-export'><a href='javascript:set_mode("export")'>Export</a></span>
+  <span class='element mode-selector'><a href='http://pgmapcss.openstreetbrowser.org/blog/'>Blog</a></span>
 </div>
 
 <div id='content'>
