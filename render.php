@@ -1,6 +1,6 @@
 <?php include "conf.php"; /* load a local configuration */ ?>
 <?php include "modulekit/loader.php"; /* loads all php-includes */ ?>
-<?
+<?php
 
 db_check_table('render', 'CREATE TABLE render ( job_id text, style text, bbox text, scale float, timestamp_submit text, timestamp_start text, timestamp_finish text )');
 

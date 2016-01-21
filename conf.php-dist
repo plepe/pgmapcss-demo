@@ -11,6 +11,8 @@ $pgmapcss = array(
     'path'      => 'pgmapcss',
     // template to use, e.g. 'mapnik-2.2'
     'template'  => 'mapnik-2.2',
+    // additional parameters
+    'parameters' => '-c db.hstore-only',
 );
 
 $wms = array(

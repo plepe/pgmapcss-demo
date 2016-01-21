@@ -44,6 +44,18 @@ if($_REQUEST['style']) {
 }
 ?></textarea>
     <div id='actions'>
+      Defaults: <select name='defaults'>
+<?
+$defaults_options = array("" => "pgmapcss", "josm" => "JOSM", "overpass-turbo" => "Overpass Turbo");
+foreach($defaults_options as $optk=>$optv) {
+  print "<option value='{$optk}'";
+  if($result && $result['param'] && $result['param']['defaults'] &&
+     ($result['param']['defaults'] == $optk))
+      print " selected";
+  print ">{$optv}</option>\n";
+}
+?>
+      </select><br>
       <input type='submit' value='Update map' />
       Docu: <a href='https://github.com/plepe/pgmapcss/blob/master/doc/MapCSS.creole' target='_new'>MapCSS</a>, <a href='https://github.com/plepe/pgmapcss/blob/master/doc/<?=$pgmapcss['template']?>.md' target='_new'>Properties</a>
     </div>

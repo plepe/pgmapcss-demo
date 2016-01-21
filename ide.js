@@ -7,7 +7,11 @@ function process_form(foo) {
   dom_form = document.getElementById("form");
 
   content = dom_form.elements.mapcss_file.value;
-  ajax("save", null, content, function(v) {
+  param = {
+      'defaults': dom_form.elements.defaults.value
+  };
+
+  ajax("save", param, content, function(v) {
     if(!v) {
       alert("An unknown error occured!");
     }

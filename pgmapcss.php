@@ -19,18 +19,31 @@ function file_path($id) {
   global $data_dir;
 
   return array(
+    'id' => $id,
     'name' => "{$id}.mapcss",
     'path' => $data_dir,
   );
 }
 
-function compile($id) {
+function bash_escape($str) {
+  return "'" . strtr($str, array(
+          "'"   => "'\''",
+      )) . "'";
+}
+
+function compile($id, $param=array()) {
   global $pgmapcss;
   global $db;
+  $add_param = "";
 
   $file = file_path($id);
 
-  $f=adv_exec("{$pgmapcss['path']} -d'{$db['database']}' -u'{$db['user']}' -p'{$db['password']}' -H'{$db['host']}' -t'{$pgmapcss['template']}' '{$file['name']}' 2>&1", $file['path'], array("LC_CTYPE"=>"en_US.UTF-8"));
+  if($param['defaults'])
+      $add_param .= " --defaults=" . bash_escape($param['defaults']);
+  if($pgmapcss['parameters'])
+      $add_param .= " ". $pgmapcss['parameters'];
+
+  $f=adv_exec("{$pgmapcss['path']} $add_param -d'{$db['database']}' -u'{$db['user']}' -p'{$db['password']}' -H'{$db['host']}' -t'{$pgmapcss['template']}' '{$file['name']}' 2>&1", $file['path'], array("LC_CTYPE"=>"en_US.UTF-8"));
 
   if($f[0] != 0)
     $id = null;
@@ -56,8 +69,9 @@ function ajax_save($param, $content) {
     $no_delete = true;
 
   file_put_contents("{$file['path']}/{$file['name']}", $content);
+  file_put_contents("{$file['path']}/{$file['id']}.param", json_encode($param));
 
-  $result = compile($id);
+  $result = compile($id, $param);
 
   if($result['status'] != 0) {
     if(!$no_delete)
@@ -82,12 +96,16 @@ function ajax_load($param) {
 
   if(!file_exists("{$file['path']}/{$file['name']}"))
     return null;
+  $param = array();
+  if(file_exists("{$file['path']}/{$file['id']}.param"))
+    $param = json_decode(file_get_contents("{$file['path']}/{$file['id']}.param"), true);
 
-  $result = compile($id);
+  $result = compile($id, $param);
 
   call_hooks("load", $id);
 
   $result['content'] = file_get_contents("{$file['path']}/{$file['name']}");
+  $result['param'] = $param;
 
   return $result;
 }

@@ -28,7 +28,7 @@
 }
 #actions {
   line-height: 28px;
-  height: 36px;
+  height: 64px;
 }
 #actions input {
   border: 1px solid #0000ff;
@@ -78,7 +78,7 @@
   display: block;
 }
 #ide textarea {
-  height: calc(100% - 38px);
+  height: calc(100% - 64px);
   width: 100%;
   box-sizing:border-box;
   -moz-box-sizing:border-box; /* Firefox */
