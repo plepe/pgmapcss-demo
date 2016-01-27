@@ -1,4 +1,4 @@
-<?
+<?php
 function ajax_export($param) {
   // check params
   if(!in_array($param['type'], array("png", "svg", "pdf", "jpg")))

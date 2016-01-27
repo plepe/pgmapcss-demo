@@ -1,4 +1,4 @@
-<?
+<?php
 function statistics_check_db() {
   db_check_table('style_load', 'CREATE TABLE style_load ( style text, timestamp text )');
 }

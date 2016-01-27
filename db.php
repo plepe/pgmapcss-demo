@@ -1,4 +1,4 @@
-<?
+<?php
 $stat = new SQLite3("{$data_dir}/statistics.db");
 
 function db_check_table($table_name, $create_statement) {

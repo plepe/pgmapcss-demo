@@ -1,4 +1,4 @@
-<?
+<?php
 $depend = array(
   "modulekit-ajax", "hooks", "adv_exec", "html", "modulekit-form",
 );

@@ -1,4 +1,4 @@
-<?
+<?php
 // use only the first n chars to build an id - as many as are needed to be unique, but at least 5.
 function build_id($content) {
   global $data_dir;

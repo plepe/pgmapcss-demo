@@ -1,4 +1,4 @@
-<?
+<?php
 $db = array(
     'user'      => 'user',
     'database'  => 'database',

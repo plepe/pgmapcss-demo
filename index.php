@@ -37,7 +37,7 @@ print_add_html_headers();
     <div id='status'></div>
   </div>
   <div id='ide' class='page page-ide'>
-    <textarea id='editor' name='mapcss_file'><?
+    <textarea id='editor' name='mapcss_file'><?php
 if($_REQUEST['style']) {
   if($result = ajax_load(array("id"=>$_REQUEST['style'])))
     print $result['content'];
@@ -45,7 +45,7 @@ if($_REQUEST['style']) {
 ?></textarea>
     <div id='actions'>
       Defaults: <select name='defaults'>
-<?
+<?php
 $defaults_options = array("" => "pgmapcss", "josm" => "JOSM", "overpass-turbo" => "Overpass Turbo");
 foreach($defaults_options as $optk=>$optv) {
   print "<option value='{$optk}'";
@@ -57,7 +57,7 @@ foreach($defaults_options as $optk=>$optv) {
 ?>
       </select><br>
       <input type='submit' value='Update map' />
-      Docu: <a href='https://github.com/plepe/pgmapcss/blob/master/doc/MapCSS.creole' target='_new'>MapCSS</a>, <a href='https://github.com/plepe/pgmapcss/blob/master/doc/<?=$pgmapcss['template']?>.md' target='_new'>Properties</a>
+      Docu: <a href='https://github.com/plepe/pgmapcss/blob/master/doc/MapCSS.creole' target='_new'>MapCSS</a>, <a href='https://github.com/plepe/pgmapcss/blob/master/doc/<?php print $pgmapcss['template']?>.md' target='_new'>Properties</a>
     </div>
   </div>
   <div id='load' class='page page-load'>
